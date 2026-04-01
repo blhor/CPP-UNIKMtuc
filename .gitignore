@@ -39,4 +39,10 @@
 
 # debug information files
 *.dwo
-".vs/"  "*.ipch"  "*.user"  "*.suo"  "Debug/"  "Release/"  "x64/" 
+.vs/
+*.ipch
+*.user
+*.suo
+Debug/
+Release/
+x64/
