@@ -163,3 +163,67 @@ int main() {
 
 	return 0;
 }
+
+//УПРАЖНЕНИЕ №4
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <fstream>
+
+
+struct CINEMA {
+	std::string name;
+	std::string street;
+	int numberOfSeats;
+	double price;
+};
+
+
+int main() {
+    setlocale(LC_ALL, "ru");
+    std::vector<CINEMA> cinemas = {
+        {"Cinema A", "Street_1", 150, 5.0},
+        {"Cinema B", "Street_2", 200, 3.5},
+        {"Cinema C", "Street_1", 100, 7.0},
+        {"Cinema D", "Street_3", 250, 4.0},
+        {"Cinema E", "Street_2", 180, 6.0},
+        {"Cinema F", "Street_3", 220, 2.5},
+        {"Cinema G", "Street_1", 300, 8.0},
+        {"Cinema H", "Street_2", 120, 4.5}
+    };
+	std::ofstream out("cinemas.txt");
+    if (!out.is_open()) {
+        std::cout << "Ошибка: файл не создан!" << std::endl;
+    }
+    else {
+        for (const auto &cinema : cinemas) {
+            out << cinema.name << " " << cinema.street << " " << cinema.numberOfSeats << " " << cinema.price << "\n";
+        }
+    }
+    out.close();
+
+    std::vector<CINEMA> cinemasFromFile;
+    std::ifstream in("cinemas.txt");
+    if (!in.is_open()) {
+        std::cout << "Ошибка: файл не создан!" << std::endl;
+    }
+    else {
+        CINEMA c;
+        while (in >> c.name >> c.street >> c.numberOfSeats >> c.price) {
+            cinemasFromFile.push_back(c);
+        }
+    }
+    in.close();
+
+    std::ofstream results("cinemas.txt", std::ios::app);
+    if (!results.is_open()) {
+        std::cout << "Ошибка: файл не создан!" << std::endl;
+    }
+    else {
+        for (const auto& cinema : cinemas) {
+            results << cinema.name << " " << cinema.street << " " << cinema.numberOfSeats << " " << cinema.price << "\n";
+        }
+    }
+    return 0;
+}
